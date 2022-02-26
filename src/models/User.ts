@@ -1,9 +1,13 @@
-import { Schema, model, Model } from "mongoose";
+import { Schema, model, Model, Document } from "mongoose";
 import bcrypt from "bcrypt";
 
 interface User {
   email: string;
   password: string;
+}
+
+interface UserDocument extends User, Document {
+  comparePassword: any;
 }
 
 const UserSchema = new Schema<User>({

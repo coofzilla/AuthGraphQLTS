@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import { mongoURI } from "./config/dev";
+import passport from "passport";
 
 const app = express();
 
@@ -19,6 +20,9 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.listen(4000, () => {
   console.log("LISTENING ON 4000");
