@@ -2,6 +2,14 @@ import { UserModel as User } from "../models/User";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 
+declare global {
+  namespace Express {
+    interface User {
+      id: string;
+    }
+  }
+}
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -19,7 +27,7 @@ passport.use(
         return done(err);
       }
       if (!user) {
-        return done(null, false, "Invalid Credentials");
+        return done(null, false, { message: "Invalid Credentials" });
       }
       user.comparePassword(password, (err, isMatch) => {
         if (err) {
@@ -28,7 +36,7 @@ passport.use(
         if (isMatch) {
           return done(null, user);
         }
-        return done(null, false, "Invalid credentials.");
+        return done(null, false, { message: "Invalid credentials." });
       });
     });
   })
