@@ -16,21 +16,21 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
+  User.findById(id, (err: any, user: any) => {
     done(err, user);
   });
 });
 
 passport.use(
   new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-    User.findOne({ email: email.toLowerCase() }, (err, user) => {
+    User.findOne({ email: email.toLowerCase() }, (err: any, user: any) => {
       if (err) {
         return done(err);
       }
       if (!user) {
         return done(null, false, { message: "Invalid Credentials" });
       }
-      user.comparePassword(password, (err, isMatch) => {
+      user.comparePassword(password, (err: any, isMatch: any) => {
         if (err) {
           return done(err);
         }
@@ -43,7 +43,7 @@ passport.use(
   })
 );
 
-function signup({ email, password, req }) {
+function signup({ email, password, req }: any) {
   const user = new User({ email, password });
   if (!email || !password) {
     throw new Error("You must provide an email and password.");
@@ -58,7 +58,7 @@ function signup({ email, password, req }) {
     })
     .then((user) => {
       return new Promise((resolve, reject) => {
-        req.logIn(user, (err) => {
+        req.logIn(user, (err: any) => {
           if (err) {
             reject(err);
           }
@@ -68,7 +68,7 @@ function signup({ email, password, req }) {
     });
 }
 
-function login({ email, password, req }) {
+function login({ email, password, req }: any) {
   return new Promise((resolve, reject) => {
     passport.authenticate("local", (err, user) => {
       if (!user) {

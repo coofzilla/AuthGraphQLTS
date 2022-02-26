@@ -7,7 +7,10 @@ interface IUser {
 }
 
 interface IUserDocument extends IUser, Document {
-  comparePassword: any;
+  comparePassword: (
+    candidatePassword: string | Buffer,
+    callback: (arg0: Error | undefined, arg1: boolean) => void
+  ) => void;
 }
 
 const UserSchema: Schema<IUserDocument> = new Schema({
