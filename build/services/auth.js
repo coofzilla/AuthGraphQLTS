@@ -21,7 +21,7 @@ passport_1.default.use(new passport_local_1.Strategy({ usernameField: "email" },
             return done(err);
         }
         if (!user) {
-            return done(null, false, "Invalid Credentials");
+            return done(null, false, { message: "Invalid Credentials" });
         }
         user.comparePassword(password, (err, isMatch) => {
             if (err) {
@@ -30,7 +30,7 @@ passport_1.default.use(new passport_local_1.Strategy({ usernameField: "email" },
             if (isMatch) {
                 return done(null, user);
             }
-            return done(null, false, "Invalid credentials.");
+            return done(null, false, { message: "Invalid credentials." });
         });
     });
 }));

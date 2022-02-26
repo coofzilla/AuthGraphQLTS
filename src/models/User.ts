@@ -1,16 +1,16 @@
-import { Schema, model, Model, Document } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 import bcrypt from "bcrypt";
 
-interface User {
+interface IUser {
   email: string;
   password: string;
 }
 
-interface UserDocument extends User, Document {
+interface IUserDocument extends IUser, Document {
   comparePassword: any;
 }
 
-const UserSchema = new Schema<User>({
+const UserSchema: Schema<IUserDocument> = new Schema({
   email: { type: String },
   password: { type: String },
 });
@@ -32,12 +32,12 @@ UserSchema.pre("save", function save(next) {
 });
 
 UserSchema.methods.comparePassword = function comparePassword(
-  candidatePassword: string,
-  callback: any
+  candidatePassword: string | Buffer,
+  callback: (arg0: Error | undefined, arg1: boolean) => void
 ) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     callback(err, isMatch);
   });
 };
 
-export const UserModel = model<User>("User", UserSchema);
+export const User = mongoose.model<IUserDocument>("User", UserSchema);

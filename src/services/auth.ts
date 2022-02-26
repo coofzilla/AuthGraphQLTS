@@ -1,4 +1,4 @@
-import { UserModel as User } from "../models/User";
+import { User } from "../models/User";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 
