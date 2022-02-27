@@ -80,4 +80,4 @@ function login({ email, password, req }: any) {
   });
 }
 
-export { login, signup };
+export default { login, signup };
