@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signup = exports.login = void 0;
 const User_1 = require("../models/User");
 const passport_1 = __importDefault(require("passport"));
 const passport_local_1 = require("passport-local");
@@ -11,12 +10,12 @@ passport_1.default.serializeUser((user, done) => {
     done(null, user.id);
 });
 passport_1.default.deserializeUser((id, done) => {
-    User_1.UserModel.findById(id, (err, user) => {
+    User_1.User.findById(id, (err, user) => {
         done(err, user);
     });
 });
 passport_1.default.use(new passport_local_1.Strategy({ usernameField: "email" }, (email, password, done) => {
-    User_1.UserModel.findOne({ email: email.toLowerCase() }, (err, user) => {
+    User_1.User.findOne({ email: email.toLowerCase() }, (err, user) => {
         if (err) {
             return done(err);
         }
@@ -35,11 +34,11 @@ passport_1.default.use(new passport_local_1.Strategy({ usernameField: "email" },
     });
 }));
 function signup({ email, password, req }) {
-    const user = new User_1.UserModel({ email, password });
+    const user = new User_1.User({ email, password });
     if (!email || !password) {
         throw new Error("You must provide an email and password.");
     }
-    return User_1.UserModel.findOne({ email })
+    return User_1.User.findOne({ email })
         .then((existingUser) => {
         if (existingUser) {
             throw new Error("Email in use");
@@ -57,7 +56,6 @@ function signup({ email, password, req }) {
         });
     });
 }
-exports.signup = signup;
 function login({ email, password, req }) {
     return new Promise((resolve, reject) => {
         passport_1.default.authenticate("local", (err, user) => {
@@ -68,4 +66,4 @@ function login({ email, password, req }) {
         })({ body: { email, password } });
     });
 }
-exports.login = login;
+exports.default = { login, signup };
