@@ -1,10 +1,12 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import { mongoURI } from "./config/dev";
+import { mongoURI, sessionSecret } from "./config/dev";
 import passport from "passport";
 import schema from "./schema/schema";
 import { graphqlHTTP } from "express-graphql";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
 const app = express();
 
@@ -22,6 +24,17 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: sessionSecret,
+    store: new MongoStore({
+      mongoUrl: mongoURI,
+    }),
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
