@@ -3,6 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { mongoURI } from "./config/dev";
 import passport from "passport";
+import schema from "./schema/schema";
+import { graphqlHTTP } from "express-graphql";
 
 const app = express();
 
@@ -23,6 +25,14 @@ app.use(cors(corsOptions));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
 
 app.listen(4000, () => {
   console.log("LISTENING ON 4000");
