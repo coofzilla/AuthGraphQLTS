@@ -57,6 +57,7 @@ function signup({ email, password, req }: any) {
       }
       return user.save();
     })
+    //Graphql expects receive promise f/async code
     .then((user) => {
       return new Promise((resolve, reject) => {
         req.logIn(user, (err: any) => {
