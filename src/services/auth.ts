@@ -43,6 +43,7 @@ passport.use(
   })
 );
 
+//fix any type
 function signup({ email, password, req }: any) {
   const user = new User({ email, password });
   if (!email || !password) {
