@@ -1,18 +1,19 @@
-import { useQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-import CurrentUser from "../queries/CurrentUser";
+import GET_USER from "../queries/CurrentUser";
 import LOGOUT_MUTATION from "../mutations/Logout";
 
 interface ButtonsProps {
-  someProp?: any;
+  user: {
+    email: string;
+    id: string;
+  };
 }
 
-const Buttons = ({ someProp }: ButtonsProps) => {
-  const { loading, error, data } = useQuery(CurrentUser);
+const Buttons = ({ user }: ButtonsProps) => {
   const [logout] = useMutation(LOGOUT_MUTATION, {
-    refetchQueries: [CurrentUser],
+    refetchQueries: [GET_USER],
   });
-  if (loading) return null;
 
   const logoutHandler = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -22,7 +23,7 @@ const Buttons = ({ someProp }: ButtonsProps) => {
     logout();
   };
 
-  if (data?.user)
+  if (user)
     return (
       <li>
         <a href="/" onClick={(e) => logoutHandler(e)}>
