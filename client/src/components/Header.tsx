@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <nav>
-      <div className="nav-wrapper">
+      <div className="nav-wrapper deep-purple accent-2">
         <Link to="/" className="brand-logo left">
           Home
         </Link>
