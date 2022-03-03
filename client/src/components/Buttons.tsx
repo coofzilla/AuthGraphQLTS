@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import GET_USER from "../queries/CurrentUser";
@@ -15,20 +16,11 @@ const Buttons = ({ user }: ButtonsProps) => {
     refetchQueries: [GET_USER],
   });
 
-  const logoutHandler = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    //prevent autorefresh onclick
-    e.preventDefault();
-    logout();
-  };
-
   if (user)
     return (
       <li>
-        <a href="/" onClick={(e) => logoutHandler(e)}>
-          Logout
-        </a>
+        {/* use a f/styling */}
+        <a onClick={() => logout()}>Logout</a>
       </li>
     );
   return (
