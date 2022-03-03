@@ -3,11 +3,7 @@ import { Link } from "react-router-dom";
 import GET_USER from "../queries/CurrentUser";
 import Buttons from "./Buttons";
 
-interface HeaderProps {
-  someProp?: any;
-}
-
-const Header = ({ someProp }: HeaderProps) => {
+const Header = () => {
   const { loading, data } = useQuery(GET_USER);
   if (loading) return null;
   const { user } = data;
