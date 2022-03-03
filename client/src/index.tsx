@@ -10,13 +10,11 @@ const client = new ApolloClient({
 
 const Root = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
