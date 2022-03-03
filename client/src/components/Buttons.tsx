@@ -1,22 +1,31 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-import GET_USER from "../queries/CurrentUser";
-import LOGOUT_USER from "../mutations/Logout";
+import CurrentUser from "../queries/CurrentUser";
+import LOGOUT_MUTATION from "../mutations/Logout";
 
 interface ButtonsProps {
   someProp?: any;
 }
 
 const Buttons = ({ someProp }: ButtonsProps) => {
-  const { loading, error, data } = useQuery(GET_USER);
-  const [logout] = useMutation(LOGOUT_USER);
-
+  const { loading, error, data } = useQuery(CurrentUser);
+  const [logout] = useMutation(LOGOUT_MUTATION, {
+    refetchQueries: [CurrentUser],
+  });
   if (loading) return null;
+
+  const logoutHandler = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    //prevent autorefresh onclick
+    e.preventDefault();
+    logout();
+  };
 
   if (data?.user)
     return (
       <li>
-        <a href="/" onClick={() => logout()}>
+        <a href="/" onClick={(e) => logoutHandler(e)}>
           Logout
         </a>
       </li>
