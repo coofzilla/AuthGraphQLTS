@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./components/App";
 import LoginForm from "./components/LoginForm";
+import DashBoard from "./components/Dashboard";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -16,6 +17,7 @@ const Root = () => {
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="login" element={<LoginForm />} />
+          <Route path="dashboard" element={<DashBoard />} />
         </Route>
       </Routes>
     </BrowserRouter>

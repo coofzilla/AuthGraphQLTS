@@ -1,16 +1,17 @@
 import { useState } from "react";
 
 interface AuthFormProps {
-  someProp?: any;
+  onSubmitMutation: any;
+  error: any;
 }
 
-const AuthForm = ({ someProp }: AuthFormProps) => {
+const AuthForm = ({ onSubmitMutation, error }: AuthFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmitHandler = (e: any) => {
     e.preventDefault();
-
+    onSubmitMutation({ variables: { email, password } });
   };
 
   return (
