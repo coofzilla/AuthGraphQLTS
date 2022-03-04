@@ -1,6 +1,7 @@
 import * as ReactDOM from "react-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./styles.css";
 import App from "./components/App";
 import LoginForm from "./components/LoginForm";
 import DashBoard from "./components/Dashboard";

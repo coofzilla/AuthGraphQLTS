@@ -22,6 +22,7 @@ const AuthForm = ({ onSubmitMutation, error }: AuthFormProps) => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            type="email"
           />
         </div>
         <div className="input-field">
