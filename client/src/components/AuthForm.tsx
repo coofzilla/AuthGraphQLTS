@@ -1,11 +1,38 @@
+import { useState } from "react";
+
 interface AuthFormProps {
   someProp?: any;
 }
 
 const AuthForm = ({ someProp }: AuthFormProps) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmitHandler = (e: any) => {
+    e.preventDefault();
+
+  };
+
   return (
-    <div>
-      <h1>AuthForm</h1>
+    <div className="row">
+      <form className="col s6" onSubmit={onSubmitHandler}>
+        <div className="input-field">
+          <input
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="input-field">
+          <input
+            placeholder="Password"
+            value={password}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button className="btn deep-purple accent-2">Submit</button>
+      </form>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import AuthForm from "./AuthForm";
+
 interface LoginFormProps {
   someProp?: any;
 }
@@ -5,7 +7,8 @@ interface LoginFormProps {
 const LoginForm = ({ someProp }: LoginFormProps) => {
   return (
     <div>
-      <h1>LoginForm</h1>
+      <h3>LoginForm</h3>
+      <AuthForm />
     </div>
   );
 };
