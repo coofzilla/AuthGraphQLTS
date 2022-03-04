@@ -34,7 +34,7 @@ const AuthForm = ({ onSubmitMutation, error }: AuthFormProps) => {
           />
         </div>
         <div className="errors">
-          {error ? <div>{error.message}</div> : null}
+          {error ? <div>{error.message.split('"')[1]}</div> : null}
         </div>
         <button className="btn deep-purple accent-2">Submit</button>
       </form>
