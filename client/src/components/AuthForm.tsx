@@ -33,6 +33,9 @@ const AuthForm = ({ onSubmitMutation, error }: AuthFormProps) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <div className="errors">
+          {error ? <div>{error.message}</div> : null}
+        </div>
         <button className="btn deep-purple accent-2">Submit</button>
       </form>
     </div>
