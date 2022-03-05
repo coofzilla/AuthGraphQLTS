@@ -14,6 +14,8 @@ const AuthForm = ({ onSubmitMutation, error }: AuthFormProps) => {
     onSubmitMutation({ variables: { email, password } });
   };
 
+  console.log(error);
+
   return (
     <div className="row">
       <form className="col s6" onSubmit={onSubmitHandler}>
@@ -34,7 +36,7 @@ const AuthForm = ({ onSubmitMutation, error }: AuthFormProps) => {
           />
         </div>
         <div className="errors">
-          {error ? <div>{error.message.split('"')[1]}</div> : null}
+          {error ? <div>{error.message}</div> : null}
         </div>
         <button className="btn deep-purple accent-2">Submit</button>
       </form>
