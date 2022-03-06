@@ -6,6 +6,7 @@ import App from "./components/App";
 import LoginForm from "./components/LoginForm";
 import DashBoard from "./components/Dashboard";
 import SignupForm from "./components/SignupForm";
+import RequireAuth from "./components/RequireAuth";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -20,7 +21,14 @@ const Root = () => {
         <Route path="/" element={<App />}>
           <Route path="login" element={<LoginForm />} />
           <Route path="signup" element={<SignupForm />} />
-          <Route path="dashboard" element={<DashBoard />} />
+          <Route
+            path="dashboard"
+            element={
+              <RequireAuth>
+                <DashBoard />
+              </RequireAuth>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
