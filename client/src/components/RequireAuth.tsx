@@ -17,7 +17,7 @@ const RequireAuth = ({ children }: RequireAuthProps) => {
     //must be /login if not will append to /currentRoute/likethis
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  return children;
+  return loading ? <div></div> : children;
 };
 
 export default RequireAuth;
