@@ -14,8 +14,6 @@ const AuthForm = ({ onSubmitMutation, error }: AuthFormProps) => {
     onSubmitMutation({ variables: { email, password } });
   };
 
-  console.log(error);
-
   return (
     <div className="row">
       <form className="col s6" onSubmit={onSubmitHandler}>
