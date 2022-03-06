@@ -13,6 +13,8 @@ const RequireAuth = ({ children }: RequireAuthProps) => {
   if (!loading && !data.user) {
     //redirect to login but saves current location trying to go when redirected
     //allows us to send them back after loggin in
+
+    //must be /login if not will append to /currentRoute/likethis
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return children;
